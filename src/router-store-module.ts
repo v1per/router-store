@@ -1,4 +1,8 @@
-import { NgModule, APP_BOOTSTRAP_LISTENER, OpaqueToken } from '@angular/core';
+import {
+  NgModule,
+  APP_BOOTSTRAP_LISTENER,
+  InjectionToken
+} from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { Dispatcher, Store, Action } from '@ngrx/store';
@@ -26,7 +30,7 @@ export function setupRouterStore(
 export function provideRouterConnector() {
   return {
     provide: APP_BOOTSTRAP_LISTENER,
-    deps: [ Router, Location, Dispatcher, Store ],
+    deps: [Router, Location, Dispatcher, Store],
     useFactory: setupRouterStore,
     multi: true
   };
@@ -37,9 +41,7 @@ export class RouterStoreModule {
   static connectRouter() {
     return {
       ngModule: RouterStoreModule,
-      providers: [
-        provideRouterConnector()
-      ]
+      providers: [provideRouterConnector()]
     };
   }
 }
